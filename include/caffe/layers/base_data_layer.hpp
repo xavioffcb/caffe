@@ -49,11 +49,6 @@ template <typename Dtype>
 class Batch {
  public:
   Blob<Dtype> data_, label_;
-#ifndef CPU_ONLY
-  cudaEvent_t copied_;
-#endif
-  // stored random numbers for this batch
-  Blob<int> random_vec_;
 };
 
 template <typename Dtype>

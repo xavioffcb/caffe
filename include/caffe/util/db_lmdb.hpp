@@ -2,7 +2,6 @@
 #ifndef CAFFE_UTIL_DB_LMDB_HPP
 #define CAFFE_UTIL_DB_LMDB_HPP
 
-#include <stdint.h>
 #include <string>
 #include <vector>
 
@@ -11,14 +10,6 @@
 #include "caffe/util/db.hpp"
 
 namespace caffe { namespace db {
-
-#if UINTPTR_MAX == 0xffffffffUL
-/* 32-bit, 1GB */
-    static const size_t LMDB_MAP_SIZE = 1073741824UL;
-#else
-/* 64-bit, 1TB */
-    static const size_t LMDB_MAP_SIZE = 1099511627776ULL;
-#endif
 
 inline void MDB_CHECK(int mdb_status) {
   CHECK_EQ(mdb_status, MDB_SUCCESS) << mdb_strerror(mdb_status);

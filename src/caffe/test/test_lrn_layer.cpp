@@ -392,7 +392,6 @@ TYPED_TEST(CuDNNLRNLayerTest, TestGradientAcrossChannelsCuDNN) {
       this->blob_top_vec_);
 }
 
-/*
 TYPED_TEST(CuDNNLRNLayerTest, TestForwardWithinChannel) {
   typedef TypeParam Dtype;
   LayerParameter layer_param;
@@ -427,7 +426,6 @@ TYPED_TEST(CuDNNLRNLayerTest, TestGradientWithinChannel) {
   checker.CheckGradientExhaustive(&layer, this->blob_bottom_vec_,
       this->blob_top_vec_);
 }
-*/
 
 TYPED_TEST(CuDNNLRNLayerTest, TestGradientAcrossChannelsLargeRegionCuDNN) {
   typedef TypeParam Dtype;

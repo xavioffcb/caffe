@@ -14,9 +14,6 @@
 
 namespace caffe {
 
-template <typename Dtype>
-class Solver;
-
 /**
  * @brief Connects Layer%s together into a directed acyclic graph (DAG)
  *        specified by a NetParameter.
@@ -28,6 +25,7 @@ class Net {
  public:
   explicit Net(const NetParameter& param, const Net* root_net = NULL);
   explicit Net(const string& param_file, Phase phase,
+      const int level = 0, const vector<string>* stages = NULL,
       const Net* root_net = NULL);
   virtual ~Net() {}
 
@@ -230,11 +228,6 @@ class Net {
   static bool StateMeetsRule(const NetState& state, const NetStateRule& rule,
       const string& layer_name);
 
-  /// @brief set a Solver for this net
-  void SetSolver(Solver<Dtype>* s) {
-    solver_ = s;
-  }
-
  protected:
   // Helpers for Init.
   /// @brief Append a new top blob to the net.
@@ -286,8 +279,6 @@ class Net {
   vector<int> param_owners_;
   vector<string> param_display_names_;
   vector<pair<int, int> > param_layer_indices_;
-  /// (layer, blob) -> param_id map
-  map<pair<int, int>, int> layer_index_params_;
   map<string, int> param_names_index_;
   /// blob indices for the input and the output of the net
   vector<int> net_input_blob_indices_;
@@ -317,8 +308,6 @@ class Net {
   bool debug_info_;
   /// The root net that actually holds the shared layers in data parallelism
   const Net* const root_net_;
-  /// Pointer to the solver being used with this net
-  Solver<Dtype>* solver_;
   DISABLE_COPY_AND_ASSIGN(Net);
 };
 

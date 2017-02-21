@@ -11,7 +11,6 @@
 #include "caffe/layers/base_data_layer.hpp"
 #include "caffe/proto/caffe.pb.h"
 #include "caffe/util/db.hpp"
-#include "caffe/util/thread_pool.hpp"
 
 namespace caffe {
 
@@ -32,8 +31,7 @@ class DataLayer : public BasePrefetchingDataLayer<Dtype> {
  protected:
   virtual void load_batch(Batch<Dtype>* batch);
 
-  DataReader reader_;
-  shared_ptr<ThreadPool> pool_;
+  DataReader<Datum> reader_;
 };
 
 }  // namespace caffe
